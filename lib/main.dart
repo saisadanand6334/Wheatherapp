@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:wheatherapp/wheather_class.dart';
-import 'package:wheatherapp/wheather_datas.dart';
+import 'package:wheatherapp/weather_datas.dart';
+import 'package:wheatherapp/weather_class.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,15 +32,19 @@ String s_Whether='';
 double Temp =0;
 double Faren=0;
 
-void initstate(){
-  super.initState();
-  whetherdetails();
-  print('jygjuhkuil');
-}
+  void initState() {
+    super.initState();
+    whetherdetails();
+  }
+
 
 void whetherdetails() async {
-  p= await serv.getWhterdatas('kerala');
+  p= await serv.getWhterdatas('Kerala'
+      );
 setState(() {
+  print(p.temper_c);
+  print(p.temper_f);
+  print(p.textin);
   Temp =p.temper_c;
   Faren=p.temper_f;
   s_Whether=p.textin;
@@ -58,21 +62,21 @@ setState(() {
             image: DecorationImage(
                 image: AssetImage("phimg/whea.jpg"), fit: BoxFit.cover)),
         child: Padding(
-          padding: const EdgeInsets.all(50),
-          child: Padding(
-            padding: const EdgeInsets.only(bottom: 80),
-            child: Column(
-              children: [
-                Center(
-                  child: Text(
-                    "kerala",
-                    style: TextStyle(
-                      fontSize: 40,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+          padding: const EdgeInsets.only(top: 80),
+          child: Column(
+            children: [
+              Expanded(
+                child: Column(
+                  children: [
+                    Text(
+                      "kerala",
+                      style: TextStyle(
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
                     ),
-                  ),
-                ),
+
                 Text(
                   "Friday ",
                   style: TextStyle(
@@ -81,51 +85,51 @@ setState(() {
                       fontSize: 20),
                 ),
 
-                Padding(
-                  padding: const EdgeInsets.only(left: 110),
-                  child: Row(
-                    children: [
-                      Text(
-                        "June ",
-                        style: TextStyle(color: Colors.white, fontSize: 40),
-                      ),
-                      Text(
-                        '21',
-                        style: TextStyle(color: Colors.white, fontSize: 40),
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 360,
-                ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-
-                       Padding(
-                         padding: const EdgeInsets.only(left: 35),
-                         child: Column(
-                          children: [
-                            Icon(
-                              Icons.wind_power_outlined
-                              ,
-                              size: 80,
-                              color: Colors.white,
-                            ),
-
-                            Text(
-                              "CLIMATE",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                      ),
-                       ),
-
+                    Text(
+                      "June ",
+                      style: TextStyle(color: Colors.white, fontSize: 40),
+                    ),
+                    Text(
+                      '21',
+                      style: TextStyle(color: Colors.white, fontSize: 40),
+                    )
                   ],
                 ),
+                ],
+                ),
+              ),
+
+              Expanded(flex: 1,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 35),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Column(
+                         children: [
+                           Icon(
+                             Icons.wind_power_outlined
+                             ,
+                             size: 80,
+                             color: Colors.white,
+                           ),
+
+                           Text(
+                             "CLIMATE",
+                             style: TextStyle(
+                                 color: Colors.white,
+                                 fontSize: 30,
+                                 fontWeight: FontWeight.bold),
+                           ),
+                         ],
+                            ),
+                      ),
+                    ),
+
 
                 Row(
                   children: [
@@ -167,26 +171,20 @@ setState(() {
                   ],
                 ),
 
-                Row(
-                  children: [
-                    Text(
-                      "${Temp.toString()}",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 80,
-                          fontWeight: FontWeight.w900),
-                    ),
-                    Text(
-                      "ºC",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 80,
-                          fontWeight: FontWeight.w900),
-                    ),
-                  ],
+                Align(alignment: Alignment.centerLeft,
+                  child: Text(
+                    "${Temp.toString()}ºC",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 80,
+                        fontWeight: FontWeight.w900),
+                  ),
                 ),
-              ],
-            ),
+
+        ],
+      ),
+              ),
+            ],
           ),
         ),
       ),

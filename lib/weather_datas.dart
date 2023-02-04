@@ -3,7 +3,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart'as http;
-import 'package:wheatherapp/wheather_datas.dart';
+import 'package:wheatherapp/weather_class.dart';
 
 
 class Whtherdatas{
@@ -16,7 +16,7 @@ class Whtherdatas{
       final uri=Uri.http('api.weatherapi.com','/v1/current.json',prameters);
       final respo=await http.get(uri);
       if (respo.statusCode==200){
-        print('is ${respo}');
+        // print('is ${respo}');
         return Whether.fromJson(jsonDecode(respo.body));
       }
       else{
